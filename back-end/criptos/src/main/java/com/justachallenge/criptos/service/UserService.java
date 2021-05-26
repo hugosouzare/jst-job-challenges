@@ -34,13 +34,20 @@ public class UserService {
 		userRepo.save(us);
 	}
 
-	public User searchUser(String id)  {
+	public User searchUser(String id) {
 		Long id1 = Long.parseLong(id);
-		
+
 		User user = userRepo.findById(id1).orElseThrow(() -> new ObjNotFoundException("User not found"));
-		
+
 		return user;
 	}
+
+	public void deleteUser(String id) {
+		Long id1 = Long.parseLong(id);
+		Optional.ofNullable(userRepo.findById(id1).orElseThrow(() -> new ObjNotFoundException("User not found")));
+		userRepo.deleteById(id1);
+	}
+
 	public User userFromDTO(RegisterUserDTO userdto) {
 
 		WatchList watch = new WatchList();
