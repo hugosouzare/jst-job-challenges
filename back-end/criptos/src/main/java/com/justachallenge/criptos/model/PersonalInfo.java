@@ -8,26 +8,51 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class PersonalInfo {
 
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long personalInfoId;
-	
+
 	private String name;
-	
+
 	private String lastName;
-	
-	@OneToMany(mappedBy = "personalInfo", cascade=CascadeType.PERSIST, orphanRemoval = true)
-	private List<Address> address = new ArrayList<>();
-	
+
 	private String phone;
-	
-	private String email;
+
+	@JsonIgnore
+	@OneToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name = "USER_ID", referencedColumnName = "userId")
+	private User user;
+
+	@OneToMany(mappedBy = "personalInfo", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Address> address = new ArrayList<>();
+
+	public PersonalInfo(String name, String lastName, String phone) {
+		super();
+		this.name = name;
+		this.lastName = lastName;
+		this.phone = phone;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public PersonalInfo() {
+		super();
+	}
 
 	public String getName() {
 		return name;
@@ -61,13 +86,4 @@ public class PersonalInfo {
 		this.phone = phone;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	
-	
 }

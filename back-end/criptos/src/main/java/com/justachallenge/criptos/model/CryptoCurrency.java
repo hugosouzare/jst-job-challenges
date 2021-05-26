@@ -33,6 +33,20 @@ public class CryptoCurrency {
 	@JoinColumn(name = "watchListId", referencedColumnName = "watchListId")
 	private WatchList watchList;
 
+	
+	
+	public CryptoCurrency(String name, String symbol, BigDecimal startWatchPrice, BigDecimal currentPrice,
+			BigDecimal changePercentSinceStart, BigDecimal changePercent24Hr, WatchList watchList) {
+		super();
+		this.name = name;
+		this.symbol = symbol;
+		this.startWatchPrice = startWatchPrice;
+		this.currentPrice = currentPrice;
+		this.changePercentSinceStart = changePercentSinceStart;
+		this.changePercent24Hr = changePercent24Hr;
+		this.watchList = watchList;
+	}
+
 	public String getName() {
 		return name;
 	}

@@ -1,5 +1,6 @@
 package com.justachallenge.criptos.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,21 +14,38 @@ public class Address {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long addressId;
-	
+
 	private String city;
-	
+
 	private String zipCode;
-	
+
+	private String street;
+
 	private String state;
-	
+
 	private String number;
-	
+
 	private String optionalAddress;
-	
-	@ManyToOne
-	@JoinColumn(name="PERSONAL_INFO_ID", referencedColumnName = "personalInfoId")
+
+	@ManyToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name = "PERSONAL_INFO_ID", referencedColumnName = "personalInfoId")
 	private PersonalInfo personalInfo;
 
+	public Address(String city, String zipCode, String street, String state, String number, String optionalAddress,
+			PersonalInfo personalInfo) {
+		super();
+		this.city = city;
+		this.zipCode = zipCode;
+		this.street = street;
+		this.state = state;
+		this.number = number;
+		this.optionalAddress = optionalAddress;
+		this.personalInfo = personalInfo;
+	}
+
+	public Address() {
+		
+	}
 	public String getCity() {
 		return city;
 	}
@@ -75,8 +93,13 @@ public class Address {
 	public void setPersonalInfo(PersonalInfo personalInfo) {
 		this.personalInfo = personalInfo;
 	}
-	
-	
-	
-	
+
+	public String getStreet() {
+		return street;
+	}
+
+	public void setStreet(String street) {
+		this.street = street;
+	}
+
 }
