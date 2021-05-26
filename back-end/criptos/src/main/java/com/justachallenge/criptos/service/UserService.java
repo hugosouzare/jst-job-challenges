@@ -12,6 +12,9 @@ import com.justachallenge.criptos.model.WatchList;
 import com.justachallenge.criptos.repository.UserRepository;
 import com.justachallenge.criptos.repository.WatchListRepository;
 import com.justachallenge.criptos.service.exception.BadRequestException;
+import com.justachallenge.criptos.service.exception.ObjNotFoundException;
+
+import javassist.NotFoundException;
 
 @Service
 public class UserService {
@@ -22,7 +25,7 @@ public class UserService {
 	@Autowired
 	WatchListRepository watchRepo;
 
-	public void registerUser(User us) {
+	public void create(User us) {
 
 		if (!Optional.ofNullable(userRepo.findByLogin(us.getLogin())).isEmpty()) {
 			throw new BadRequestException("Username already exists");
@@ -31,6 +34,13 @@ public class UserService {
 		userRepo.save(us);
 	}
 
+	public User searchUser(String id)  {
+		Long id1 = Long.parseLong(id);
+		
+		User user = userRepo.findById(id1).orElseThrow(() -> new ObjNotFoundException("User not found"));
+		
+		return user;
+	}
 	public User userFromDTO(RegisterUserDTO userdto) {
 
 		WatchList watch = new WatchList();

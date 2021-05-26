@@ -27,6 +27,7 @@ public class Address {
 
 	private String optionalAddress;
 
+	
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "PERSONAL_INFO_ID", referencedColumnName = "personalInfoId")
 	private PersonalInfo personalInfo;
