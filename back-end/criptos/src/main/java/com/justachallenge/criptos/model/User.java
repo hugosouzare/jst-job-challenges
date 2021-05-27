@@ -1,13 +1,21 @@
 package com.justachallenge.criptos.model;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.justachallenge.criptos.enums.Profile;
 
 @Entity
 public class User {
@@ -29,7 +37,11 @@ public class User {
 
 	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
 	private PersonalInfo personalInfo;
-
+	
+	@ElementCollection(fetch=FetchType.EAGER)
+	@CollectionTable(name="PROFILES")
+    private Set<Integer> profiles = new HashSet<>();
+	
 	public User(String login, String password, String email, WatchList watchList, PersonalInfo personalInfo) {
 		super();
 		this.login = login;
@@ -37,11 +49,13 @@ public class User {
 		this.email = email;
 		this.watchList = watchList;
 		this.personalInfo = personalInfo;
+		addProfile(Profile.USER);
 
 	}
 
 	public User() {
 		super();
+		addProfile(Profile.USER);
 	}
 
 	public String getLogin() {
@@ -84,4 +98,11 @@ public class User {
 		this.personalInfo = personalInfo;
 	}
 
+	public Set<Profile> getProfiles() {
+		return profiles.stream().map(x -> Profile.toEnum(x)).collect(Collectors.toSet());
+	}
+	
+	public void addProfile (Profile profile) {
+		profiles.add(profile.getCod());
+	}
 }

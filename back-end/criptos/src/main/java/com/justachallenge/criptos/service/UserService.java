@@ -3,6 +3,7 @@ package com.justachallenge.criptos.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.justachallenge.criptos.dto.RegisterUserDTO;
@@ -14,11 +15,12 @@ import com.justachallenge.criptos.repository.WatchListRepository;
 import com.justachallenge.criptos.service.exception.BadRequestException;
 import com.justachallenge.criptos.service.exception.ObjNotFoundException;
 
-import javassist.NotFoundException;
-
 @Service
 public class UserService {
 
+	@Autowired
+	private BCryptPasswordEncoder passEncoder;
+	
 	@Autowired
 	UserRepository userRepo;
 
@@ -54,7 +56,7 @@ public class UserService {
 
 		PersonalInfo personal = new PersonalInfo(userdto.getName(), userdto.getLastName(), userdto.getPhone());
 
-		User us = new User(userdto.getUsername(), userdto.getPassword(), userdto.getEmail(), watch, personal);
+		User us = new User(userdto.getUsername(), passEncoder.encode(userdto.getPassword()), userdto.getEmail(), watch, personal);
 
 		personal.setUser(us);
 		watch.setUser(us);
