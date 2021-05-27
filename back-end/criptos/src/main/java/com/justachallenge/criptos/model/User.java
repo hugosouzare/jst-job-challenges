@@ -38,6 +38,7 @@ public class User {
 	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
 	private PersonalInfo personalInfo;
 	
+	@JsonIgnore
 	@ElementCollection(fetch=FetchType.EAGER)
 	@CollectionTable(name="PROFILES")
     private Set<Integer> profiles = new HashSet<>();
@@ -104,5 +105,10 @@ public class User {
 	
 	public void addProfile (Profile profile) {
 		profiles.add(profile.getCod());
+	}
+	
+
+	public Long getUserId() {
+		return userId;
 	}
 }
