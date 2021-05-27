@@ -1,8 +1,10 @@
 package com.justachallenge.criptos.enums;
 
-import java.util.Arrays;
-import java.util.List;
 
+
+/**
+* Classe ENUM para atribuir permissões ao usuário, necessária para configurações do Spring Security
+**/
 public enum Profile {
 
 	ADMIN(1, "ROLE_ADMIN"),

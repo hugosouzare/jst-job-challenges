@@ -12,6 +12,10 @@ import com.justachallenge.criptos.repository.UserRepository;
 import com.justachallenge.criptos.security.UserSS;
 import com.justachallenge.criptos.service.exception.BadRequestException;
 
+/**
+* Classe de serviço de Endereços
+* 
+**/
 @Service
 public class AddressService {
 
@@ -29,6 +33,9 @@ public class AddressService {
 		addrepo.save(ad);
 	}
 
+	/**
+	* Retorna um objeto Address através de um AddressDTO
+	**/
 	public Address addresFromDTO(AddressDTO adDTO) {
 		
 		UserSS userSec = UserSecurityService.authenticated();

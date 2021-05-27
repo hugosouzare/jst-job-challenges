@@ -2,6 +2,9 @@ package com.justachallenge.criptos.dto;
 
 import javax.validation.constraints.NotBlank;
 
+/**
+* Classe DTO para registrar um usuário
+**/
 public class RegisterUserDTO {
 
 	@NotBlank

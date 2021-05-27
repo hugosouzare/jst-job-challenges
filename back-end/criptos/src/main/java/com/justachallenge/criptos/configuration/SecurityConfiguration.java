@@ -22,6 +22,7 @@ import com.justachallenge.criptos.security.JWTAuthFilter;
 import com.justachallenge.criptos.security.JWTAuthorizationFilter;
 import com.justachallenge.criptos.security.JWTUtil;
 
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -40,6 +41,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	};
 
+	/**
+	* Método de configuração do Spring Security
+	**/
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
@@ -58,11 +62,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		
 	}
 	
+	/**
+	* Método de configuração do Spring Security
+	**/
 	@Override
 	public void configure (AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
 	}
 
+	/**
+	* Método de configuração do Spring Security
+	**/
 	@Bean
 	CorsConfigurationSource corsConfigurationSource() {
 		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -70,6 +80,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		return source;
 	}
 
+	/**
+	* Cria uma bean da classe BCryptPasswordEncoder, utilizado para encriptar as senhas.
+	**/
 	@Bean
 	public BCryptPasswordEncoder bCryptPasswordEncoder() {
 		return new BCryptPasswordEncoder();

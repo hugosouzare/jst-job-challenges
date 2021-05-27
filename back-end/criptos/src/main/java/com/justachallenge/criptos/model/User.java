@@ -17,6 +17,9 @@ import javax.persistence.OneToOne;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.justachallenge.criptos.enums.Profile;
 
+/**
+* Classe modelo de Usuários
+**/
 @Entity
 public class User {
 

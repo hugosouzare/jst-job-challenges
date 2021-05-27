@@ -10,6 +10,9 @@ import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+/**
+* Classe modelo de Endereços
+**/
 @Entity
 public class Address {
 

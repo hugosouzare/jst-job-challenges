@@ -15,6 +15,10 @@ import com.justachallenge.criptos.repository.UserRepository;
 import com.justachallenge.criptos.security.UserSS;
 import com.justachallenge.criptos.service.exception.BadRequestException;
 
+/**
+* Classe de serviço de WatchLists
+* 
+**/
 @Service
 public class WatchListService {
 
@@ -27,12 +31,18 @@ public class WatchListService {
 	@Autowired
 	CryptocurrencyRepository cryptoRepo;
 
+	/**
+	* Busca informações de uma criptomoeda pela API do CoinCap
+	**/
 	public BasicCoinInfoDTO findCoin(String id) {
 		BasicCoinInfoDTO coinInfo = coinService.searchCoin(id);
 
 		return coinInfo;
 	}
 
+	/**
+	* Insere uma criptomoeda na watchlist de um usuário logado através do id/nome da criptomoeda
+	**/
 	public void insertCoinIntoWL(String id) {
 		UserSS userSec = UserSecurityService.authenticated();
 
@@ -51,6 +61,9 @@ public class WatchListService {
 
 	}
 
+	/**
+	* Deleta uma criptomoeda da watchlist
+	**/
 	public void deleteCoin(String name) {
 		UserSS userSec = UserSecurityService.authenticated();
         
@@ -66,6 +79,9 @@ public class WatchListService {
 
 	}
 
+	/**
+	* Retorna uma lista com todas as criptomoedas do usuário
+	**/
 	public List<MyCoinsDTO> coinList() {
 
 		UserSS userSec = UserSecurityService.authenticated();

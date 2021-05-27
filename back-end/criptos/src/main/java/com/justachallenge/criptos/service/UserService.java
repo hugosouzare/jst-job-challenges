@@ -17,6 +17,10 @@ import com.justachallenge.criptos.security.UserSS;
 import com.justachallenge.criptos.service.exception.BadRequestException;
 import com.justachallenge.criptos.service.exception.ObjNotFoundException;
 
+/**
+* Classe de serviço de Usuários
+* 
+**/
 @Service
 public class UserService {
 
@@ -29,6 +33,9 @@ public class UserService {
 	@Autowired
 	WatchListRepository watchRepo;
 
+	/**
+	* Método para inserção de usuários no banco de dados
+	**/
 	public void create(User us) {
 
 		if (!Optional.ofNullable(userRepo.findByLogin(us.getLogin())).isEmpty()) {
@@ -38,6 +45,9 @@ public class UserService {
 		userRepo.save(us);
 	}
 
+	/**
+	* Método para busca de usuários através do ID
+	**/
 	public User searchUser(String id) {
 		Long id1 = Long.parseLong(id);
 
@@ -46,6 +56,9 @@ public class UserService {
 		return user;
 	}
 
+	/**
+	* Método para retornar um UserInfoDTO de um usuário logado, necessário para o endpoint de informações do usuário
+	**/
 	public UserInfoDTO userInfo() {
 		UserSS user = UserSecurityService.authenticated();
 
@@ -56,6 +69,9 @@ public class UserService {
 		return userinfo;
 	}
 
+	/**
+	* Método para deleção de usuários no banco de dados
+	**/
 	public void deleteUserById(String id) {
 
 		Long id1 = Long.parseLong(id);
@@ -65,6 +81,9 @@ public class UserService {
 		userRepo.deleteById(id1);
 	}
 
+	/**
+	* Retorna um User através de um DTO de registro
+	**/
 	public User userFromDTO(RegisterUserDTO userdto) {
 
 		WatchList watch = new WatchList();
@@ -80,6 +99,10 @@ public class UserService {
 		return us;
 	}
 
+	/**
+	* Método para atualização de usuários, retornando um user para leitura no endpoint de atualização
+	* 
+	**/
 	public User update(RegisterUserDTO userdto) {
 
 		UserSS userSec = UserSecurityService.authenticated();

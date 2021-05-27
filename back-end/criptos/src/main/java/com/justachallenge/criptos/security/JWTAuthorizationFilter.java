@@ -14,6 +14,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
+/**
+* Classe para configurações do JWT
+**/
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
 	private JWTUtil jwtUtil;

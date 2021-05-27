@@ -2,6 +2,9 @@ package com.justachallenge.criptos.dto;
 
 import javax.validation.constraints.NotBlank;
 
+/**
+* Classe DTO para cadastro de endereço
+**/
 public class AddressDTO {
 
 	@NotBlank

@@ -12,6 +12,9 @@ import com.justachallenge.criptos.model.User;
 import com.justachallenge.criptos.repository.UserRepository;
 import com.justachallenge.criptos.security.UserSS;
 
+/**
+* Classe auxiliar de serviço do Spring Security
+**/
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 

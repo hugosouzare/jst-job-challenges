@@ -13,6 +13,9 @@ import com.justachallenge.criptos.service.exception.ObjNotFoundException;
 
 import feign.FeignException;
 
+/**
+* Classe para tratamento de erros
+**/
 @ControllerAdvice
 public class ControllerExceptionHandler {
 

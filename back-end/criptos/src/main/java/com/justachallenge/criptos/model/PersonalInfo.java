@@ -14,6 +14,9 @@ import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+/**
+* Classe modelo de informações pessoais
+**/
 @Entity
 public class PersonalInfo {
 

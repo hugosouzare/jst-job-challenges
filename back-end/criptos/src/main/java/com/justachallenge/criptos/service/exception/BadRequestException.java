@@ -1,5 +1,8 @@
 package com.justachallenge.criptos.service.exception;
 
+/**
+* Exceção para Bad Requests - Status 400
+**/
 public class BadRequestException extends RuntimeException {
 
 

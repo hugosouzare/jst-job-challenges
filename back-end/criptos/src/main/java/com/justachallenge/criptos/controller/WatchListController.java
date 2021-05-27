@@ -22,23 +22,35 @@ public class WatchListController {
 	@Autowired
 	WatchListService service;
 
+	/**
+	* Retorna informações de criptmoedas através da API do CoinCap, apenas para consulta.
+	**/
 	@GetMapping(value = "/find/{id}")
 	public ResponseEntity<BasicCoinInfoDTO> findCoin(@PathVariable String id) {
 		BasicCoinInfoDTO coinInfo = service.findCoin(id);
 		return ResponseEntity.ok().body(coinInfo);
 	}
 
+	/**
+	* Insere uma criptomoeda na watchlist do usuário logado através do nome da cripto
+	**/
 	@PostMapping(value = "/insert/{name}")
 	public void insertCoin(@PathVariable String name) {
 		service.insertCoinIntoWL(name);
 	}
 
+	/**
+	* Deleta uma criptomoeda na watchlist do usuário logado
+	**/
 	@DeleteMapping(value = "/delete/{name}")
 	public void deleteCoin(@PathVariable String name) {
 		service.deleteCoin(name);
 
 	}
 	
+	/**
+	* Retorna as todas as criptomoedas da watchlist do usuário logado
+	**/
 	@GetMapping(value ="/mycoins") 
 	public ResponseEntity<?> myCoins() {
 		List<MyCoinsDTO> list = service.coinList();

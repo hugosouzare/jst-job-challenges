@@ -9,6 +9,9 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
+/**
+* Classe utilitária para geração e verificação de tokens do JWT
+**/
 @Component
 public class JWTUtil {
 

@@ -1,5 +1,8 @@
 package com.justachallenge.criptos.dto;
 
+/**
+* Classe DTO para mostrar informações das coins de um usuário
+**/
 public class MyCoinsDTO {
 
 	private String name;

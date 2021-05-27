@@ -19,6 +19,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.justachallenge.criptos.dto.LoginDTO;
 
+/**
+* Classe para configurações do JWT
+**/
+
 public class JWTAuthFilter extends UsernamePasswordAuthenticationFilter {
 
 	private AuthenticationManager authManager;

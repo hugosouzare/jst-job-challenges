@@ -2,6 +2,9 @@ package com.justachallenge.criptos.dto;
 
 import com.justachallenge.criptos.model.PersonalInfo;
 
+/**
+* Classe DTO para mostrar dados básicos de um usuário
+**/
 public class UserInfoDTO {
 
 	

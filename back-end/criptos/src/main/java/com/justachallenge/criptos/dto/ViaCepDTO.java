@@ -1,5 +1,8 @@
 package com.justachallenge.criptos.dto;
 
+/**
+* Classe DTO para coletar as informações da API do ViaCep
+**/
 public class ViaCepDTO {
 
 	private String cep;

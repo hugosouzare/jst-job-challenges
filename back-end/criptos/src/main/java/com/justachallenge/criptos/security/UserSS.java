@@ -10,6 +10,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.justachallenge.criptos.enums.Profile;
 
+/**
+* Classe necessária para configurações de autenticação e autorização do Spring Security
+**/
 public class UserSS implements UserDetails {
 
 

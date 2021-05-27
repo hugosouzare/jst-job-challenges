@@ -13,7 +13,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
+/**
+* Classe modelo de WatchList
+**/
 @Entity
 public class WatchList {
 

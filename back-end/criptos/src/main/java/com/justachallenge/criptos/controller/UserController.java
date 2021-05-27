@@ -27,12 +27,19 @@ public class UserController {
 	@Autowired
 	UserService service;
 	
+	/**
+	* Registra um usuário
+	**/
 	@PostMapping(value = "/register")
 	public ResponseEntity<User> registerUser(@Valid @RequestBody RegisterUserDTO register) {
 		User user = service.userFromDTO(register);
 		service.create(user);
 		return new ResponseEntity<User>(user, HttpStatus.CREATED);
 	}
+	
+	/**
+	* Retorna as informações de um usuário pelo ID, apenas para usuários com permissão nível ADMIN
+	**/
 	
 	@PreAuthorize ("hasAnyRole('ADMIN')")
 	@GetMapping(value = "/userinfo/{id}")
@@ -41,12 +48,18 @@ public class UserController {
 		return ResponseEntity.ok().body(user);
 	}
 	
+	/**
+	* Retorna as informações do usuário logado
+	**/
 	@GetMapping(value = "/myinfo")
 	public ResponseEntity<UserInfoDTO> userInfo() {
 		UserInfoDTO user = service.userInfo();
 		return ResponseEntity.ok().body(user);
 	}
 	
+	/**
+	* Deleta um usuário pelo id, apenas para usuários com permissão nível ADMIN
+	**/
 	@PreAuthorize ("hasAnyRole('ADMIN')")
 	@DeleteMapping(value = "/deleteuser/{id}")
 	public void deleteUser(@PathVariable String id) {
@@ -54,6 +67,9 @@ public class UserController {
 	}
 	
 
+	/**
+	* Atualiza um usuário
+	**/
 	@PutMapping(value = "/updateinfos")
 	public ResponseEntity<User> updateUserInfo(@Valid @RequestBody RegisterUserDTO userInfos) {
 		User user = service.update(userInfos);

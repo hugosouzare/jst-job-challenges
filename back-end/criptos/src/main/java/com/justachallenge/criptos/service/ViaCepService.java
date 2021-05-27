@@ -6,6 +6,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.justachallenge.criptos.dto.ViaCepDTO;
 
+/**
+* Classe para consumir a API do viacep
+**/
 @FeignClient(url = "https://viacep.com.br/ws/", name = "viacep")
 public interface ViaCepService {
 

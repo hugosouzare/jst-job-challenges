@@ -1,5 +1,8 @@
 package com.justachallenge.criptos.dto;
 
+/**
+* Classe DTO para coletar as informações da API da CoinCap
+**/
 public class BasicCoinInfoDTO {
 	
 	private DataDTO data;

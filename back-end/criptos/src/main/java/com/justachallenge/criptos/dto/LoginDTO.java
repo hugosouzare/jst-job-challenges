@@ -2,6 +2,9 @@ package com.justachallenge.criptos.dto;
 
 import java.io.Serializable;
 
+/**
+* Classe DTO para realizar login
+**/
 public class LoginDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;

@@ -21,6 +21,9 @@ public class AddressController {
 	@Autowired
 	AddressService addservice;
 
+	/**
+	* Endpoint para criação de endereços para um usuário
+	**/
 	@PostMapping(value ="/insert")
 	public ResponseEntity<Address> insertAddress(@Valid @RequestBody AddressDTO addDTO) {
 		Address address = addservice.addresFromDTO(addDTO);

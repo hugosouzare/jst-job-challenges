@@ -2,6 +2,9 @@ package com.justachallenge.criptos.controller.handler;
 
 import java.io.Serializable;
 
+/**
+* Classe para personalizar mensagem de erro
+**/
 public class StandardError implements Serializable {
 
 	private static final long serialVersionUID = 1L;
