@@ -32,10 +32,10 @@ public class User {
 	private String email;
 
 	@JsonIgnore
-	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "user", cascade = CascadeType.PERSIST, orphanRemoval = true)
 	private WatchList watchList;
 
-	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "user", cascade = CascadeType.PERSIST, orphanRemoval = true)
 	private PersonalInfo personalInfo;
 	
 	@JsonIgnore

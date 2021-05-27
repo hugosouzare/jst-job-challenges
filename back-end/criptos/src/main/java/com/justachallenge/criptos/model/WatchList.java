@@ -21,11 +21,11 @@ public class WatchList {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long watchListId;
 
-	@OneToMany(mappedBy = "watchList", cascade = CascadeType.PERSIST, orphanRemoval = true)
+	@OneToMany(mappedBy = "watchList", cascade = CascadeType.MERGE, orphanRemoval = true)
 	private List<CryptoCurrency> cryptoList = new ArrayList<>();
 
 	@JsonIgnore
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "USER_ID", referencedColumnName = "userId")
 	private User user;
 

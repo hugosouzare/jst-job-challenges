@@ -1,11 +1,14 @@
 package com.justachallenge.criptos.service;
 
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.justachallenge.criptos.dto.BasicCoinInfoDTO;
+import com.justachallenge.criptos.dto.ListCoinDTO;
+import com.justachallenge.criptos.dto.MyCoinsDTO;
 import com.justachallenge.criptos.model.CryptoCurrency;
 import com.justachallenge.criptos.model.User;
 import com.justachallenge.criptos.repository.CryptocurrencyRepository;
@@ -21,7 +24,7 @@ public class WatchListService {
 
 	@Autowired
 	UserRepository userRepo;
-	
+
 	@Autowired
 	CryptocurrencyRepository cryptoRepo;
 
@@ -32,18 +35,68 @@ public class WatchListService {
 	}
 
 	public void insertCoinIntoWL(String id) {
-        
-		BasicCoinInfoDTO coinInfo = findCoin(id);
-		
 		UserSS userSec = UserSecurityService.authenticated();
 
-		Optional.ofNullable(userRepo.findById(userSec.getId()))
-				.orElseThrow(() -> new BadRequestException("User not found"));
+		BasicCoinInfoDTO coinInfo = findCoin(id);
 
-		CryptoCurrency crypto = new CryptoCurrency(coinInfo.getData().getName(), coinInfo.getData().getSymbol(),
-				coinInfo.getData().getPriceUsd(), userRepo.findById(userSec.getId()).orElseThrow().getWatchList());
-		
+		User user = userRepo.findById(userSec.getId()).orElseThrow(() -> new BadRequestException("User not found"));
+
+		if (user.getWatchList().getCryptoList().contains(cryptoRepo.findByName(coinInfo.getData().getId()))) {
+			throw new BadRequestException("You already have " + coinInfo.getData().getName() + " on your watchlist");
+		}
+
+		CryptoCurrency crypto = new CryptoCurrency(coinInfo.getData().getId(), coinInfo.getData().getSymbol(),
+				coinInfo.getData().getPriceUsd(), user.getWatchList());
+
 		cryptoRepo.save(crypto);
+
+	}
+
+	public void deleteCoin(String name) {
+		UserSS userSec = UserSecurityService.authenticated();
+
+		User user = userRepo.findById(userSec.getId()).orElseThrow(() -> new BadRequestException("User not found"));
+
+		if (!user.getWatchList().getCryptoList().contains(cryptoRepo.findByName(name))) {
+			throw new BadRequestException("You don't have " + name + " on your watchlist");
+		}
+
+		CryptoCurrency crypto = cryptoRepo.findByName(name);
+
+		cryptoRepo.deleteById(crypto.getId());
+
+	}
+
+	public List<MyCoinsDTO> coinList() {
+
+		
+		
+
+		UserSS userSec = UserSecurityService.authenticated();
+
+		User user = userRepo.findById(userSec.getId()).orElseThrow(() -> new BadRequestException("User not found"));
+
+		List<CryptoCurrency> list = user.getWatchList().getCryptoList();
+
+		List<MyCoinsDTO> myList = new ArrayList<>();
+
+		for (CryptoCurrency c : list) {
+
+			MyCoinsDTO myCoin = new MyCoinsDTO();
+			BasicCoinInfoDTO coinInfo = findCoin(c.getName());
+			myCoin.setName(c.getName());
+			myCoin.setPrice(coinInfo.getData().getPriceUsd());
+			myCoin.setStartWatchPrice(c.getStartWatchPrice());
+			myCoin.setVariation24Hr(coinInfo.getData().getChangePercent24Hr());
+			myCoin.setSymbol(c.getSymbol());
+			
+			myList.add(myCoin);
+			
+		}
+		
+		
+		
+		return myList;
 
 	}
 }
