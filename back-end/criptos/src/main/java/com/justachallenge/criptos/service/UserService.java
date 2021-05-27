@@ -49,10 +49,6 @@ public class UserService {
 	public UserInfoDTO userInfo() {
 		UserSS user = UserSecurityService.authenticated();
 
-		if (user == null) {
-			throw new ObjNotFoundException("slasa");
-		}
-
 		User user2 = userRepo.findById(user.getId()).orElseThrow();
 
 		UserInfoDTO userinfo = new UserInfoDTO(user2.getLogin(), user2.getEmail(), user2.getPersonalInfo());
@@ -61,11 +57,11 @@ public class UserService {
 	}
 
 	public void deleteUserById(String id) {
-		
+
 		Long id1 = Long.parseLong(id);
-		
+
 		Optional.ofNullable(userRepo.findById(id1).orElseThrow(() -> new ObjNotFoundException("User not found")));
-		
+
 		userRepo.deleteById(id1);
 	}
 
@@ -82,5 +78,23 @@ public class UserService {
 		watch.setUser(us);
 
 		return us;
+	}
+
+	public User update(RegisterUserDTO userdto) {
+
+		UserSS userSec = UserSecurityService.authenticated();
+
+		User user = userRepo.findById(userSec.getId()).orElseThrow(() -> new BadRequestException("User not found"));
+
+		user.setEmail(userdto.getEmail());
+		user.setLogin(userdto.getUsername());
+		user.setPassword(passEncoder.encode(userdto.getPassword()));
+		user.getPersonalInfo().setName(userdto.getName());
+		user.getPersonalInfo().setLastName(userdto.getLastName());
+		user.getPersonalInfo().setPhone(userdto.getPhone());
+
+		userRepo.save(user);
+		
+		return user;
 	}
 }

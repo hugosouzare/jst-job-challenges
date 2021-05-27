@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Address {
 
@@ -27,7 +29,7 @@ public class Address {
 
 	private String optionalAddress;
 
-	
+	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "PERSONAL_INFO_ID", referencedColumnName = "personalInfoId")
 	private PersonalInfo personalInfo;

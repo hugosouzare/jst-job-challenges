@@ -10,20 +10,19 @@ public class MyCoinsDTO {
 
 	private String startWatchPrice;
 
-	private String variationSinceStart;
 
 	private String variation24Hr;
 	
 	
 
-	public MyCoinsDTO(String name, String symbol, String price, String startWatchPrice, String variationSinceStart,
+	public MyCoinsDTO(String name, String symbol, String price, String startWatchPrice, 
 			String variation24Hr) {
 		super();
 		this.name = name;
 		this.symbol = symbol;
 		this.price = price;
 		this.startWatchPrice = startWatchPrice;
-		this.variationSinceStart = variationSinceStart;
+	
 		this.variation24Hr = variation24Hr;
 	}
 	
@@ -63,13 +62,6 @@ public class MyCoinsDTO {
 		this.startWatchPrice = startWatchPrice;
 	}
 
-	public String getVariationSinceStart() {
-		return variationSinceStart;
-	}
-
-	public void setVariationSinceStart(String variationSinceStart) {
-		this.variationSinceStart = variationSinceStart;
-	}
 
 	public String getVariation24Hr() {
 		return variation24Hr;

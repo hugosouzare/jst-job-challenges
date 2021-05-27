@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -40,7 +41,7 @@ public class UserController {
 		return ResponseEntity.ok().body(user);
 	}
 	
-	@GetMapping(value = "/myinfo/")
+	@GetMapping(value = "/myinfo")
 	public ResponseEntity<UserInfoDTO> userInfo() {
 		UserInfoDTO user = service.userInfo();
 		return ResponseEntity.ok().body(user);
@@ -50,6 +51,14 @@ public class UserController {
 	@DeleteMapping(value = "/deleteuser/{id}")
 	public void deleteUser(@PathVariable String id) {
 		service.deleteUserById(id);
+	}
+	
+
+	@PutMapping(value = "/updateinfos")
+	public ResponseEntity<User> updateUserInfo(@Valid @RequestBody RegisterUserDTO userInfos) {
+		User user = service.update(userInfos);
+		
+		return ResponseEntity.ok().body(user);
 	}
 	
 	

@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.justachallenge.criptos.dto.BasicCoinInfoDTO;
-import com.justachallenge.criptos.dto.ListCoinDTO;
 import com.justachallenge.criptos.dto.MyCoinsDTO;
 import com.justachallenge.criptos.model.CryptoCurrency;
 import com.justachallenge.criptos.model.User;
@@ -54,9 +53,9 @@ public class WatchListService {
 
 	public void deleteCoin(String name) {
 		UserSS userSec = UserSecurityService.authenticated();
-
+        
 		User user = userRepo.findById(userSec.getId()).orElseThrow(() -> new BadRequestException("User not found"));
-
+	
 		if (!user.getWatchList().getCryptoList().contains(cryptoRepo.findByName(name))) {
 			throw new BadRequestException("You don't have " + name + " on your watchlist");
 		}
@@ -68,9 +67,6 @@ public class WatchListService {
 	}
 
 	public List<MyCoinsDTO> coinList() {
-
-		
-		
 
 		UserSS userSec = UserSecurityService.authenticated();
 
@@ -89,13 +85,11 @@ public class WatchListService {
 			myCoin.setStartWatchPrice(c.getStartWatchPrice());
 			myCoin.setVariation24Hr(coinInfo.getData().getChangePercent24Hr());
 			myCoin.setSymbol(c.getSymbol());
-			
+
 			myList.add(myCoin);
-			
+
 		}
-		
-		
-		
+
 		return myList;
 
 	}
