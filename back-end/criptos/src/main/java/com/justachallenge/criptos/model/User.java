@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.justachallenge.criptos.enums.Profile;
@@ -21,6 +22,7 @@ import com.justachallenge.criptos.enums.Profile;
 * Classe modelo de Usuários
 **/
 @Entity
+@Table(name="CRYPTOUSER")
 public class User {
 
 	@Id

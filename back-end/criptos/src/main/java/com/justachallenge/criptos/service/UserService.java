@@ -41,6 +41,10 @@ public class UserService {
 		if (!Optional.ofNullable(userRepo.findByLogin(us.getLogin())).isEmpty()) {
 			throw new BadRequestException("Username already exists");
 		}
+		
+		if (!Optional.ofNullable(userRepo.findByEmail(us.getEmail())).isEmpty()) {
+			throw new BadRequestException("Email is already in use");
+		}
 
 		userRepo.save(us);
 	}
