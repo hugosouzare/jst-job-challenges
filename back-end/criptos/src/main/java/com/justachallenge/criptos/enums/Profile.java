@@ -34,6 +34,9 @@ public enum Profile {
 		this.role = role;
 	}
 	
+	/**
+	* Exibe um Profile através do código
+	**/
 	public static Profile toEnum(Integer cod) {
 		
 		

@@ -37,6 +37,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Autowired
 	JWTUtil jwtUtil;
 
+	/**
+	* Constante com os endpoints que não precisam de autenticação
+	**/
 	private static final String[] PUBLIC_MATCHERS = { "/h2-console/**",
 
 			    "/v2/api-docs",
