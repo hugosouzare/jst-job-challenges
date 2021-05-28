@@ -40,10 +40,10 @@ public class ControllerExceptionHandler {
 	@ExceptionHandler(FeignException.class)
 	public ResponseEntity<StandardError> feignError(FeignException e, HttpServletRequest request) {
 		
-		StandardError er = new StandardError(HttpStatus.BAD_REQUEST.value(), "Invalid zip code format, please insert a valid zip code ex: 01153000",
+		StandardError er = new StandardError(HttpStatus.NOT_FOUND.value(), e.getMessage(),
 				System.currentTimeMillis());
 
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(er);
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(er);
 	}
 	
 	    @ExceptionHandler(ObjNotFoundException.class)
@@ -52,6 +52,6 @@ public class ControllerExceptionHandler {
 		StandardError er = new StandardError(HttpStatus.NOT_FOUND.value(), e.getMessage(),
 				System.currentTimeMillis());
 
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(er);
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(er);
 }
 }
